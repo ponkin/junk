@@ -44,7 +44,8 @@ div.message div.subject-part{
 	width: 50%;
 }
 div.message div.date-part{
-	width: 25%;
+	width: 15%;
+	font-size: 15px;
 }
 
 div#version {
