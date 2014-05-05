@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" ng-app="junkMailApp">
+<head>
+  <meta charset="utf-8">
+  <title>Temporary email app</title>
+  <link rel="stylesheet" href="css/app.css"/>
+  <link href="css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+	<div class="row">
+  		<div class="col-md-12">
+  			<!-- <div id="header">Header</div> -->
+  		</div>
+	</div>
+	<div class="row" ng-controller="MainCtrl">
+	  <div class="col-md-8">
+	  	<div id="email-bar" class="well well-lg">
+		  <span>{{ inboxName }}@flashmail.com</span>
+		  <button type="button" class="btn btn-primary">Copy to clipboard</button>
+		</div> 
+	  </div>
+
+	</div>
+	<div class="row">
+	  <div class="col-md-12">
+	  	<div id="menu-bar"></div>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-md-12">
+	  	<div ng-view></div>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="col-md-12">
+	  	<div id="version">Junk app: v<span app-version></span></div>
+	  </div>
+	</div>	
+  </div>
+
+ 
+ <script src="js/angular.js"></script>
+ <script src="js/angular-route.js"></script>
+ <script src="js/app.js"></script>
+ <script src="js/ui-bootstrap-0.9.0.js"></script>
+  <script src="js/ui-bootstrap-tpls-0.9.0.js"></script>
+   <script src="js/controllers.js"></script>
+   <script src="js/filters.js"></script>
+   <script src="js/directives.js"></script>
+   <script src="js/services.js"></script>   
+   <script src="https://cdn.firebase.com/js/client/1.0.11/firebase.js"></script>
+   <script src="js/angularfire.js"></script>
+</body>
+</html>

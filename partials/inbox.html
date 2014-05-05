@@ -1,0 +1,7 @@
+  <div id="messages-list">
+    <div class="message" ng-repeat="(k,v) in messages">
+	  <div class="from-part">{{ v.from }}</div>
+	  <div class="subject-part"><a href="#/messages/{{k}}">{{ v.subject }}</a></div>
+	  <div class="date-part">{{ new Date(v.date).toLocaleString() }}</div>
+	</div>
+  </div>
