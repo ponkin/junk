@@ -3,23 +3,33 @@
 /* Controllers */
 
 angular.module('junkMailApp.controllers', [])
-  .controller('MainCtrl', ['$scope', 'FirebaseService', function($scope, service) {
-  	
-	  var inboxURL = service.getInboxURL();
-	  var parts = inboxURL.split('/');
+	.controller('MainCtrl', ['$scope', 'InboxService',
+		function($scope, service) {
 
-	  $scope.inboxName = parts[parts.length-1];
-	  
-  }])
+			$scope.inboxName = service.getInboxName();
 
-  .controller('InboxCtrl', ['$scope', 'FirebaseService', function($scope, service) {	    
+		}
+	])
 
-	  $scope.messages = service.getFirebase();
-	  
-  }])
-  
-  .controller('MessageCtrl', ['$scope', '$routeParams', 'FirebaseService', function($scope, $routeParams, service) {
-	  
-	  $scope.message = service.getFirebase()[$routeParams.messageId];
+.controller('InboxCtrl', ['$scope', 'InboxService',
+	function($scope, service) {
+		var inboxName = service.getInboxName();
+		service.getMessages().then(function(messages) {			
+			$scope.messages = messages;
+		}, function(reason) {
+			console.log("Error getting messages:"+reason);
+		});
 
-  }]);
+	}
+])
+
+.controller('MessageCtrl', ['$scope', '$routeParams', 'InboxService',
+	function($scope, $routeParams, inboxService) {
+		$scope.message = inboxService.getMessages().then(function(messages) {			
+			$scope.message = messages[$routeParams.messageId];
+		}, function(reason) {
+			console.log("Error getting messages:"+reason);
+		});
+
+	}
+]);
