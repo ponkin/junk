@@ -7,10 +7,9 @@
     "**/node_modules/**"
   ],
   "rules": "config/security-rules.json",
-      "redirects": [ {
-        "source" : "/foo",
-        "destination" : "/bar",
-        "type" : 301
-      } ] 
+  "rewrites": [ {
+      "source": "**",
+      "destination": "/index.html"
+    } ] 
     
 }
