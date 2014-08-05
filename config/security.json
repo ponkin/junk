@@ -1,0 +1,13 @@
+{
+    "rules": {
+      "users": {
+          "$inboxName" :{
+            "messages" :{
+              ".read" : "root.child('users').child($inboxName).child('user_id').val() == auth.uid"
+              },            
+            ".write" : "! root.child('users').child($inboxName).exists()"
+          }
+        },
+        ".write": true
+    }
+}

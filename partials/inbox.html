@@ -1,7 +1,7 @@
   <div id="messages-list">
     <div class="message" ng-repeat="(k,v) in messages">
-	  <div class="from-part">{{ v.from }}</div>
-	  <div class="subject-part"><a href="#/messages/{{k}}">{{ v.subject }}</a></div>
-	  <div class="date-part">{{ v.date | toLocalTime }}</div>
+	  	  	<div class="from-part">{{ v.from }}</div>
+	  		<div class="subject-part" ng-class="{read: v.is_new == 'false'}"><a href="#/messages/{{k}}">{{ v.subject }}</a></div>
+	  		<div class="date-part">{{ v.date | toLocalTime }}</div>
 	</div>
   </div>

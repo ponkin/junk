@@ -1,0 +1,16 @@
+{
+  "firebase": "sweltering-fire-2054",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ],
+  "rules": "config/security-rules.json",
+      "redirects": [ {
+        "source" : "/foo",
+        "destination" : "/bar",
+        "type" : 301
+      } ] 
+    
+}

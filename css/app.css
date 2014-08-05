@@ -26,8 +26,8 @@ div.message {
 	width: 100%;
 }
 
-div.read {
-	background-color: white;
+div.read a{
+	color:#333;
 }
 
 

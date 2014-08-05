@@ -2,6 +2,7 @@
 
 
 angular.module('junkMailApp', [
+  'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
   'junkMailApp.filters',

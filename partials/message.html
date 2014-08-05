@@ -1,4 +1,4 @@
 <div class="well well-lg">
 	<span id="email-from">{{ message.from }}</span>
-	<div id="email-body">{{ message.body }}</div>
+	<div id="email-body" ng-bind-html="message.body | fromBase64"></div>
 </div>
