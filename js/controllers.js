@@ -26,17 +26,20 @@ angular.module('junkMailApp.controllers', [])
 			});
 		}
 	])
-	.controller('MainCtrl', ['$scope', 'InboxService',
+	.controller('MainCtrl', ['$scope', 'NameService',
 		function($scope, service) {
-
 			$scope.inboxName = service.getInboxName();
-
+			$scope.inbox = service.getInboxName() + '@junkmail.tk';
+			return {
+					getInboxCopy: function(){
+						return service.getInboxName() + '@junkmail.tk';
+					}
+			};
 		}
 	])
 
 .controller('InboxCtrl', ['$scope', 'InboxService', 'PageService',
 	function($scope, service, pageSrvc) {
-		var inboxName = service.getInboxName();
 		service.getMessages().then(function(messages) {
 			$scope.messages = messages;
 		}, function(reason) {

@@ -9,29 +9,39 @@ angular.module('junkMailApp.services', ['firebase'])
 	.value('version', '0.2')
 	.value('base_url', 'https://sweltering-fire-2054.firebaseio.com/')
 	.factory('PageService', function() {
-	   var mesCount = 0;
-	   return {		 
-		 incrMessageCount: function(){
-		 	mesCount++;
-		 },
-		 decrMessageCount: function(){
-		 	mesCount--;
-		 },
-		 getMessageCount: function(){
-			 return mesCount;
-		 }
-	   };
-	})	
-	.factory('InboxService', ['$q', '$firebase', 'base_url',
-		function($q, $firebase, base_url) {
-			var possible = "234679ACDEFGHJKMNPQRTVWXYZ";
-			var text = '';
-
+		var mesCount = 0;
+		return {
+			incrMessageCount: function() {
+				mesCount++;
+			},
+			decrMessageCount: function() {
+				mesCount--;
+			},
+			getMessageCount: function() {
+				return mesCount;
+			}
+		};
+	})
+	.factory('NameService', function() {
+		var possible = "234679ACDEFGHJKMNPQRTVWXYZ";
+		var text = '';
+		for (var i = 0; i < 5; i++){
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+		return {
+			getInboxName: function() {
+				return text;
+			},
+			generateNewName: function() {
+				text += possible.charAt(Math.floor(Math.random() * possible.length));
+				return text;
+			}
+		};
+	})
+	.factory('InboxService', ['$q', '$firebase', 'base_url', 'NameService',
+		function($q, $firebase, base_url, nameService) {
 			var baseRef = new Firebase(base_url);
 			var messagesRef = $q.defer();
-
-			for (var i = 0; i < 5; i++)
-				text += possible.charAt(Math.floor(Math.random() * possible.length));
 
 			var auth = new FirebaseSimpleLogin(baseRef, function(error, user) {
 				if (error) {
@@ -41,9 +51,11 @@ angular.module('junkMailApp.services', ['firebase'])
 				} else if (user) {
 					// user authenticated with Firebase
 					console.log("User ID: " + user.uid + ", Provider: " + user.provider);
-					var userDir = baseRef.child('users').child(text);
+					var userDir = baseRef.child('users').child(nameService.getInboxName());
+					var priority = 253370764800 * 1000 - (new Date().getTime());
+					console.log("Initial message priority=" + priority.toString());
 					userDir.onDisconnect().remove();
-					userDir.set({
+					userDir.setWithPriority({
 						user_id: user.uid,
 						messages: {
 							0: {
@@ -53,19 +65,15 @@ angular.module('junkMailApp.services', ['firebase'])
 								"subject": "About service usage"
 							}
 						}
-					});
+					}, priority);
 					messagesRef.resolve($firebase(userDir.child('messages')));
 				} else {
 					// user is logged out
 					console.log("User logout");
 					auth.login('anonymous');
 				}
-			});
-			//auth.login('anonymous');
+			});			
 			return {
-				getInboxName: function() {
-					return text;
-				},
 				getMessages: function() {
 					return messagesRef.promise;
 				}

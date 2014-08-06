@@ -5,13 +5,35 @@ div#messages-list {
 	margin-bottom: 20px;
 }
 
-div#email-bar {
-	text-align:left;
-	font-size: 18px;
+div.header{
+	padding-top:45px;
+	padding-bottom:15px;
 }
+div.email-bar {
+	width: 100%;
+	font: 16px Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+	line-height: 1.4;	
+	vertical-align: middle;
+	margin-bottom:15px;
+}
+div.email-bar input{
+	min-height: 26px;
+	text-align: center;
+}
+span#text{
+	min-height: 26px;
+	text-align: center;
+	width:100%;
+	padding-left:25px;
+}
+
 
 div#menu-bar {
 
+}
+
+div.empty-message-list{
+	width:100%;
 }
 
 div.message {

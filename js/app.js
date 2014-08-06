@@ -8,10 +8,12 @@ angular.module('junkMailApp', [
   'junkMailApp.filters',
   'junkMailApp.services',
   'junkMailApp.directives',
-  'junkMailApp.controllers'
+  'junkMailApp.controllers',
+  'ngClipboard',
 ]).
-config(['$routeProvider', function($routeProvider) {
+config(['$routeProvider', 'ngClipProvider', function($routeProvider, ngClipProvider) {
   $routeProvider.when('/inbox', {templateUrl: 'partials/inbox.html', controller: 'InboxCtrl'});
   $routeProvider.when('/messages/:messageId', {templateUrl: 'partials/message.html', controller: 'MessageCtrl'});
   $routeProvider.otherwise({redirectTo: '/inbox'});
+  ngClipProvider.setPath("js/ZeroClipboard.swf");
 }]);
